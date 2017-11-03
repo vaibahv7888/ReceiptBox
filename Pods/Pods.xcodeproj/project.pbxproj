@@ -1,0 +1,502 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		131BBDB0C9960A7305A6BEF8FB4BF3C2 /* Pods-SampleProject-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B85479980EA8624D85A067A987EC2AD /* Pods-SampleProject-dummy.m */; };
+		1397527E70AB314B02DC62A080402047 /* BEMAnimationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B2DC01D56039192ABE43C1EB637689DD /* BEMAnimationManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		22070F61B09BA42858CC48073D6893D4 /* BEMCheckBoxGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = C585360CC5A7E36E246D4AC9FE90D544 /* BEMCheckBoxGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		320B694DB3AA97711690F3B20817DE68 /* BEMCheckBoxGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E1488CFC83123AF15960CB09382F4E /* BEMCheckBoxGroup.m */; };
+		40372C56143EC23D91CBAB5209984EDA /* BEMCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0952808F569DFBF56EBF156DD5AA5B /* BEMCheckBox.m */; };
+		426004D2B97F800FAB58113F6FA770F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		4FA47B06D01DA86FAB2730721F7FD721 /* BEMCheckBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 91A86DE9DCBB0F460E6FB0B6C61EE66E /* BEMCheckBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		64A83D2EE3771FE71CCF5FF013B642D3 /* BEMAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB932ACE86CBB7F1975064B9367C319 /* BEMAnimationManager.m */; };
+		759714475104FDA29EEDE71D62DA768C /* BEMCheckBox-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E74091EBB26A95204E12584606B3786 /* BEMCheckBox-dummy.m */; };
+		779AFCEBEF3FF01FAD678CD51748C730 /* BEMPathManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA2284732DCB641DDE82E534C22196 /* BEMPathManager.m */; };
+		A4DCFDF70765DC53D429CD13B8451DE7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		AFDE4CE739C0F5E3DEBB25D3D9F82C33 /* BEMPathManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AF626E452DE25BEE80D05CFE3654CFE5 /* BEMPathManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B54ECDE3EA3B4B279986F9DEA158134F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 23C46D12E093E8E822378781F8728EEC;
+			remoteInfo = BEMCheckBox;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1BB8E7EA9281FCC1EF6AB3E81EAACB2B /* BEMCheckBox-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BEMCheckBox-prefix.pch"; sourceTree = "<group>"; };
+		2C509AC96AE02E24AD177C9169F73FE1 /* libBEMCheckBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libBEMCheckBox.a; path = libBEMCheckBox.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		463088471DF11C402A9D253969380523 /* Pods-SampleProject-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SampleProject-frameworks.sh"; sourceTree = "<group>"; };
+		4BFA2284732DCB641DDE82E534C22196 /* BEMPathManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BEMPathManager.m; path = Classes/BEMPathManager.m; sourceTree = "<group>"; };
+		65E1488CFC83123AF15960CB09382F4E /* BEMCheckBoxGroup.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BEMCheckBoxGroup.m; path = Classes/BEMCheckBoxGroup.m; sourceTree = "<group>"; };
+		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		701C397B9724CE83E688C67262FEA79D /* Pods-SampleProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SampleProject.release.xcconfig"; sourceTree = "<group>"; };
+		731BF341240B4E15A8F0B40B01CC253E /* Pods-SampleProject-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SampleProject-acknowledgements.plist"; sourceTree = "<group>"; };
+		7B85479980EA8624D85A067A987EC2AD /* Pods-SampleProject-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SampleProject-dummy.m"; sourceTree = "<group>"; };
+		7E74091EBB26A95204E12584606B3786 /* BEMCheckBox-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BEMCheckBox-dummy.m"; sourceTree = "<group>"; };
+		7EB932ACE86CBB7F1975064B9367C319 /* BEMAnimationManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BEMAnimationManager.m; path = Classes/BEMAnimationManager.m; sourceTree = "<group>"; };
+		8F0952808F569DFBF56EBF156DD5AA5B /* BEMCheckBox.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BEMCheckBox.m; path = Classes/BEMCheckBox.m; sourceTree = "<group>"; };
+		91A86DE9DCBB0F460E6FB0B6C61EE66E /* BEMCheckBox.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BEMCheckBox.h; path = Classes/BEMCheckBox.h; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		97936C1798CA188F00A6B309BA7BD8DB /* Pods-SampleProject-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SampleProject-resources.sh"; sourceTree = "<group>"; };
+		AB7FC5D18D76C4A83CCC26FA2EA36DD1 /* Pods-SampleProject-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SampleProject-acknowledgements.markdown"; sourceTree = "<group>"; };
+		AF626E452DE25BEE80D05CFE3654CFE5 /* BEMPathManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BEMPathManager.h; path = Classes/BEMPathManager.h; sourceTree = "<group>"; };
+		B2DC01D56039192ABE43C1EB637689DD /* BEMAnimationManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BEMAnimationManager.h; path = Classes/BEMAnimationManager.h; sourceTree = "<group>"; };
+		BAF54AE6CE68CD8CECCA9BDF8BEE1FBC /* libPods-SampleProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-SampleProject.a"; path = "libPods-SampleProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C46E4BAEF8930EE0DA0F0E37EBF305CB /* BEMCheckBox.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BEMCheckBox.xcconfig; sourceTree = "<group>"; };
+		C585360CC5A7E36E246D4AC9FE90D544 /* BEMCheckBoxGroup.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BEMCheckBoxGroup.h; path = Classes/BEMCheckBoxGroup.h; sourceTree = "<group>"; };
+		E0BDF240D0ADD9BFAA90B6D1F4ED169E /* Pods-SampleProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SampleProject.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		167A373A7BBE31FDBEDF79FEB42A9999 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				426004D2B97F800FAB58113F6FA770F5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECF50CEB0B9AA4F441B7CF5A54F9E286 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4DCFDF70765DC53D429CD13B8451DE7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0DFA2FDC4917D45B57017D25FDE34E26 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2C509AC96AE02E24AD177C9169F73FE1 /* libBEMCheckBox.a */,
+				BAF54AE6CE68CD8CECCA9BDF8BEE1FBC /* libPods-SampleProject.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5CE42A374405CA158840C3FD42789760 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FB67B4FAABEBE7B54EFEBCC36B7095C7 /* BEMCheckBox */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				5CE42A374405CA158840C3FD42789760 /* Pods */,
+				0DFA2FDC4917D45B57017D25FDE34E26 /* Products */,
+				9AE2A64513E76991860F342C9EF4037B /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		8C31AF425C814EBDE7C0272A168E84BB /* Pods-SampleProject */ = {
+			isa = PBXGroup;
+			children = (
+				AB7FC5D18D76C4A83CCC26FA2EA36DD1 /* Pods-SampleProject-acknowledgements.markdown */,
+				731BF341240B4E15A8F0B40B01CC253E /* Pods-SampleProject-acknowledgements.plist */,
+				7B85479980EA8624D85A067A987EC2AD /* Pods-SampleProject-dummy.m */,
+				463088471DF11C402A9D253969380523 /* Pods-SampleProject-frameworks.sh */,
+				97936C1798CA188F00A6B309BA7BD8DB /* Pods-SampleProject-resources.sh */,
+				E0BDF240D0ADD9BFAA90B6D1F4ED169E /* Pods-SampleProject.debug.xcconfig */,
+				701C397B9724CE83E688C67262FEA79D /* Pods-SampleProject.release.xcconfig */,
+			);
+			name = "Pods-SampleProject";
+			path = "Target Support Files/Pods-SampleProject";
+			sourceTree = "<group>";
+		};
+		9AE2A64513E76991860F342C9EF4037B /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				8C31AF425C814EBDE7C0272A168E84BB /* Pods-SampleProject */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D35AF013A5F0BAD4F32504907A52519E /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D35AF013A5F0BAD4F32504907A52519E /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		EFE6E4BC1082920EE0558CB0C1E01722 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				C46E4BAEF8930EE0DA0F0E37EBF305CB /* BEMCheckBox.xcconfig */,
+				7E74091EBB26A95204E12584606B3786 /* BEMCheckBox-dummy.m */,
+				1BB8E7EA9281FCC1EF6AB3E81EAACB2B /* BEMCheckBox-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/BEMCheckBox";
+			sourceTree = "<group>";
+		};
+		FB67B4FAABEBE7B54EFEBCC36B7095C7 /* BEMCheckBox */ = {
+			isa = PBXGroup;
+			children = (
+				B2DC01D56039192ABE43C1EB637689DD /* BEMAnimationManager.h */,
+				7EB932ACE86CBB7F1975064B9367C319 /* BEMAnimationManager.m */,
+				91A86DE9DCBB0F460E6FB0B6C61EE66E /* BEMCheckBox.h */,
+				8F0952808F569DFBF56EBF156DD5AA5B /* BEMCheckBox.m */,
+				C585360CC5A7E36E246D4AC9FE90D544 /* BEMCheckBoxGroup.h */,
+				65E1488CFC83123AF15960CB09382F4E /* BEMCheckBoxGroup.m */,
+				AF626E452DE25BEE80D05CFE3654CFE5 /* BEMPathManager.h */,
+				4BFA2284732DCB641DDE82E534C22196 /* BEMPathManager.m */,
+				EFE6E4BC1082920EE0558CB0C1E01722 /* Support Files */,
+			);
+			name = BEMCheckBox;
+			path = BEMCheckBox;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		1CD6B1488EB0D354A5C81E9D4615D5E6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1397527E70AB314B02DC62A080402047 /* BEMAnimationManager.h in Headers */,
+				4FA47B06D01DA86FAB2730721F7FD721 /* BEMCheckBox.h in Headers */,
+				22070F61B09BA42858CC48073D6893D4 /* BEMCheckBoxGroup.h in Headers */,
+				AFDE4CE739C0F5E3DEBB25D3D9F82C33 /* BEMPathManager.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		23C46D12E093E8E822378781F8728EEC /* BEMCheckBox */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CBBEFCD817BB38203A7FB7028CC24D3D /* Build configuration list for PBXNativeTarget "BEMCheckBox" */;
+			buildPhases = (
+				70597FE97BC87DCD8DEDE14A33E06E51 /* Sources */,
+				ECF50CEB0B9AA4F441B7CF5A54F9E286 /* Frameworks */,
+				1CD6B1488EB0D354A5C81E9D4615D5E6 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BEMCheckBox;
+			productName = BEMCheckBox;
+			productReference = 2C509AC96AE02E24AD177C9169F73FE1 /* libBEMCheckBox.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		F7CBEAD566BE63A47451A756CF6FF2AC /* Pods-SampleProject */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADE8AE0BB2B2592CC9C2B3BB3B2783DF /* Build configuration list for PBXNativeTarget "Pods-SampleProject" */;
+			buildPhases = (
+				397A4B0CD0163EA9B2AC292BA7C574DD /* Sources */,
+				167A373A7BBE31FDBEDF79FEB42A9999 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D7FEE758E42FED2744E2C65F65539A98 /* PBXTargetDependency */,
+			);
+			name = "Pods-SampleProject";
+			productName = "Pods-SampleProject";
+			productReference = BAF54AE6CE68CD8CECCA9BDF8BEE1FBC /* libPods-SampleProject.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 0DFA2FDC4917D45B57017D25FDE34E26 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				23C46D12E093E8E822378781F8728EEC /* BEMCheckBox */,
+				F7CBEAD566BE63A47451A756CF6FF2AC /* Pods-SampleProject */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		397A4B0CD0163EA9B2AC292BA7C574DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				131BBDB0C9960A7305A6BEF8FB4BF3C2 /* Pods-SampleProject-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70597FE97BC87DCD8DEDE14A33E06E51 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64A83D2EE3771FE71CCF5FF013B642D3 /* BEMAnimationManager.m in Sources */,
+				759714475104FDA29EEDE71D62DA768C /* BEMCheckBox-dummy.m in Sources */,
+				40372C56143EC23D91CBAB5209984EDA /* BEMCheckBox.m in Sources */,
+				320B694DB3AA97711690F3B20817DE68 /* BEMCheckBoxGroup.m in Sources */,
+				779AFCEBEF3FF01FAD678CD51748C730 /* BEMPathManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D7FEE758E42FED2744E2C65F65539A98 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BEMCheckBox;
+			target = 23C46D12E093E8E822378781F8728EEC /* BEMCheckBox */;
+			targetProxy = B54ECDE3EA3B4B279986F9DEA158134F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		166E2CAC58E8608AD59A6F0B71C9C3E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		2DFE74EF74D0A578D89F9466C80BEEA8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 701C397B9724CE83E688C67262FEA79D /* Pods-SampleProject.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		49BED4E55F315A17D5D080C0B3DCC286 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C46E4BAEF8930EE0DA0F0E37EBF305CB /* BEMCheckBox.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/BEMCheckBox/BEMCheckBox-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		7D8F938A92333426A5588500F4DC8E85 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0BDF240D0ADD9BFAA90B6D1F4ED169E /* Pods-SampleProject.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		AA0B5BDEB018901CD8F88AAD05F5B893 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ABC66BF482C1EC36829ADFEA33736B7E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C46E4BAEF8930EE0DA0F0E37EBF305CB /* BEMCheckBox.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/BEMCheckBox/BEMCheckBox-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				166E2CAC58E8608AD59A6F0B71C9C3E0 /* Debug */,
+				AA0B5BDEB018901CD8F88AAD05F5B893 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ADE8AE0BB2B2592CC9C2B3BB3B2783DF /* Build configuration list for PBXNativeTarget "Pods-SampleProject" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D8F938A92333426A5588500F4DC8E85 /* Debug */,
+				2DFE74EF74D0A578D89F9466C80BEEA8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CBBEFCD817BB38203A7FB7028CC24D3D /* Build configuration list for PBXNativeTarget "BEMCheckBox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49BED4E55F315A17D5D080C0B3DCC286 /* Debug */,
+				ABC66BF482C1EC36829ADFEA33736B7E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}
