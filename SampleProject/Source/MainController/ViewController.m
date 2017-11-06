@@ -140,16 +140,14 @@ UIActivityIndicatorView* _activityIndicator;
     
     TServiceWrapper  *mServiceWrapper = [[TServiceWrapper alloc] init];
     [mServiceWrapper setDelegate:self];
-    AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [delegate managedObjectContext];
     for (NSManagedObject* r in dbarray) {
 //        [imagesArray addObject:[r valueForKey:@"img"]];
         [mServiceWrapper uploadReceipt:[r valueForKey:@"img"] inUploadFolder:Username fileFormat:@"jpg"];
         [_deltaReceiptImagesArray addObject:[r valueForKey:@"img"]];
-        [context deleteObject:r];
+        [self.managedObjectContext deleteObject:r];
     }
     
-    if (![context save:&error]) {
+    if (![self.managedObjectContext save:&error]) {
         NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }
 
@@ -158,22 +156,17 @@ UIActivityIndicatorView* _activityIndicator;
 
 - (void) checkRemoveReceipt {
     NSPredicate *p = [NSPredicate predicateWithFormat:@"receiptState = %@", [NSString stringWithFormat:@"2"]];
-//    NSArray *matchedDicts = [self.receiptsArray filteredArrayUsingPredicate:p];
-//    [self removeFromLocalDBReceipts:[NSMutableArray arrayWithArray:matchedDicts]];
     NSArray *dbarray = [self dbArrayWithPredicade:p];
     
     TServiceWrapper  *mServiceWrapper = [[TServiceWrapper alloc] init];
     [mServiceWrapper setDelegate:self];
-    AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [delegate managedObjectContext];
     for (NSManagedObject* r in dbarray) {
         NSNumber* receiptBoxId = [NSNumber numberWithInt:[[r valueForKey:@"receiptBoxID"] intValue]];
         [mServiceWrapper removeReceiptFromBox:[NSNumber numberWithInt:69] ReceiptId:receiptBoxId];
-//        NSPredicate *p = [NSPredicate predicateWithFormat:@"receiptBoxID = %@", receiptBoxId];
-        [context deleteObject:r];
+        [self.managedObjectContext deleteObject:r];
     }
     NSError *error = nil;
-    if (![context save:&error]) {
+    if (![self.managedObjectContext save:&error]) {
         NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }
 }
@@ -239,17 +232,15 @@ UIActivityIndicatorView* _activityIndicator;
     if(receipts.count == 0) {
         return;
     }
-    AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [delegate managedObjectContext];
     NSLog(@"receipts -> %@", receipts);
     for (NSManagedObject *receipt in receipts) {
         [self.receiptsArray removeObject:receipt];
-        [context deleteObject:receipt];
+        [self.managedObjectContext deleteObject:receipt];
     }
     
     NSError *error = nil;
     // Save the object to persistent store
-    if (![context save:&error]) {
+    if (![self.managedObjectContext save:&error]) {
         NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }
 }
@@ -261,18 +252,16 @@ UIActivityIndicatorView* _activityIndicator;
     NSLog(@"receipts= %@", receipts);
     TServiceWrapper  *mServiceWrapper = [[TServiceWrapper alloc] init];
     [mServiceWrapper setDelegate:self];
-    AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [delegate managedObjectContext];
     for (NSManagedObject* r in receipts) {
         [mServiceWrapper uploadReceipt:[r valueForKey:@"img"] inUploadFolder:Username fileFormat:@"jpg"];
         [_deltaReceiptImagesArray addObject:[r valueForKey:@"img"]];
         [self.receiptsArray removeObject:r];
-        [context deleteObject:r];
+        [self.managedObjectContext deleteObject:r];
     }
 //    [self removeFromLocalDBReceipts:receipts];
     NSError *error = nil;
     // Save the object to persistent store
-    if (![context save:&error]) {
+    if (![self.managedObjectContext save:&error]) {
         NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }
 }
@@ -298,10 +287,8 @@ UIActivityIndicatorView* _activityIndicator;
 }
 
 - (void) saveUnSyncReceipt:(NSData*)receiptImg {
-    NSManagedObjectContext *context = [self managedObjectContext];
-    
     // Create a new managed object
-    NSManagedObject *newDevice = [NSEntityDescription insertNewObjectForEntityForName:@"ReceiptBox" inManagedObjectContext:context];
+    NSManagedObject *newDevice = [NSEntityDescription insertNewObjectForEntityForName:@"ReceiptBox" inManagedObjectContext:self.managedObjectContext];
 
 //    NSData *imageData = UIImageJPEGRepresentation(self.imageView.image, 0);
     [newDevice setValue:receiptImg forKey:@"img"];
@@ -310,29 +297,23 @@ UIActivityIndicatorView* _activityIndicator;
     
     NSError *error = nil;
     // Save the object to persistent store
-    if (![context save:&error]) {
+    if (![self.managedObjectContext save:&error]) {
         NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }
 }
 
 - (NSArray*) dbArrayWithPredicade:(NSPredicate*) predicate {
-    AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [delegate managedObjectContext];
-//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"ReceiptBox"];
     NSFetchRequest * fetctRequest = [NSFetchRequest fetchRequestWithEntityName:@"ReceiptBox"];
     [fetctRequest setIncludesPropertyValues:NO];
     [fetctRequest setPredicate:predicate];
     NSError *error = nil;
-    NSArray *dbarray = [context executeFetchRequest:fetctRequest error:&error];
+    NSArray *dbarray = [self.managedObjectContext executeFetchRequest:fetctRequest error:&error];
     
     return dbarray;
 }
 
 - (void) saveReceipt:(NSDictionary*) receipt {
-    AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [delegate managedObjectContext];
-    
-    NSManagedObject *newDevice = [NSEntityDescription insertNewObjectForEntityForName:@"ReceiptBox" inManagedObjectContext:context];
+    NSManagedObject *newDevice = [NSEntityDescription insertNewObjectForEntityForName:@"ReceiptBox" inManagedObjectContext:self.managedObjectContext];
     NSNumber* receiptBoxId = [NSNumber numberWithInteger:[[receipt valueForKey:@"ReceiptBoxId"] integerValue]];
     [newDevice setValue:receiptBoxId forKey:@"receiptBoxID"];
     [newDevice setValue:[NSNumber numberWithInteger:[[receipt valueForKey:@"UserId"] integerValue]] forKey:@"userID"];
@@ -350,7 +331,7 @@ UIActivityIndicatorView* _activityIndicator;
     [newDevice setValue:[receipt valueForKey:@"ReceiptType"] forKey:@"receiptType"];
     [newDevice setValue:[receipt valueForKey:@"ScanningStatus"] forKey:@"scanningStatus"];
     [newDevice setValue:[receipt valueForKey:@"Source"] forKey:@"source"];
-    NSString* transactionDate = [receipt valueForKey:@"TransactionDate"];
+//    NSString* transactionDate = [receipt valueForKey:@"TransactionDate"];
 //    NSLog(@"transactionDate= %@",transactionDate);
 //    NSDate* date = [receipt valueForKey:@"TransactionDate"];
     NSDate* date = [NSDate date];
@@ -368,23 +349,16 @@ UIActivityIndicatorView* _activityIndicator;
     [newDevice setValue:[NSNumber numberWithInteger:[[receipt valueForKey:@"VAT4"] floatValue]] forKey:@"vat4"];
     [newDevice setValue:[receipt valueForKey:@"Vendor"] forKey:@"vendor"];
     [newDevice setValue:[receipt valueForKey:@"WebThumbnailReceiptPath"] forKey:@"webThumbnailReceiptPath"];
-//    NSLog(@"newDevice = %@", [newDevice valueForKey:@"mobileThumbnailReceiptPath"]);
 //    [newDevice setValue:imageData forKey:@"img"];
-    
-//    if(self.receiptPath != nil && ![self.receiptPath isEqualToString:@""]) {
-//        [newDevice setValue:self.receiptPath forKey:@"receiptPath"];
-//    }
     
     NSError *error = nil;
     // Save the object to persistent store
-    if (![context save:&error]) {
+    if (![self.managedObjectContext save:&error]) {
         NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }
 }
 
 - (void) saveThumbnailImg:(NSData*) img forReceiptId:(NSString*) receiptId {
-    AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [delegate managedObjectContext];
     NSPredicate *p = [NSPredicate predicateWithFormat:@"receiptBoxID = %@", receiptId];
     NSError *error = nil;
     NSLog(@"p= %@", p);
@@ -395,7 +369,7 @@ UIActivityIndicatorView* _activityIndicator;
     }
     
     // Save the object to persistent store
-    if (![context save:&error]) {
+    if (![self.managedObjectContext save:&error]) {
         NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }
 }
@@ -403,17 +377,6 @@ UIActivityIndicatorView* _activityIndicator;
 -(void)uploadFileDoneWithStatus:(NSDictionary *)responseStatusDetails
 {
     NSLog(@"%@",responseStatusDetails);
-    if(responseStatusDetails != NULL) {
-//        self.receiptDictionary = responseStatusDetails;
-        
-//        NSMutableArray *menuItemsArray=[[NSMutableArray alloc] initWithArray:[[[[[[self.receiptDictionary valueForKey:@"xml"] valueForKey:@"Menu"] valueForKey:@"pair"] valueForKey:@"MenuCategory"] valueForKey:@"MenuItems"] valueForKey:@"menuItem"]];
-        
-//        self.receiptsArray = [[NSMutableArray alloc] initWithArray:[[[[[self.receiptDictionary valueForKey:@"s:Envelope"] valueForKey:@"s:Body"] valueForKey:@"GetPendingListResponse"] valueForKey:@"GetPendingListResult"] valueForKey:@"a:vw_Receiptbox"]];
-        
-//        NSLog(@"menu item array is %@",self.receiptsArray);
-        
-//        [self.receiptBoxCollectionView reloadData];
-    }
     [_activityIndicator stopAnimating];
 }
 
@@ -421,7 +384,7 @@ UIActivityIndicatorView* _activityIndicator;
     NSManagedObjectContext *context = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"ReceiptBox"];
     self.receiptsArray = [[context executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    self.receiptsArray = [[[self.receiptsArray reverseObjectEnumerator] allObjects] mutableCopy];
+//    self.receiptsArray = [[[self.receiptsArray reverseObjectEnumerator] allObjects] mutableCopy];
 //    NSLog(@"menu item array is %@",self.receiptsArray);
 }
 
@@ -460,9 +423,7 @@ UIActivityIndicatorView* _activityIndicator;
     RBCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ReceiptCell" forIndexPath:indexPath];
     
     NSManagedObject *receipt = [self.receiptsArray objectAtIndex:indexPath.row];
-//    NSInteger *userID = [receipt valueForKey:@"userID"];
     cell.receiptCostLable.text = [NSString stringWithFormat:@"Receipt_%@", [receipt valueForKey:@"receiptBoxID"]];
-//    cell.receiptImageView.image = [UIImage imageWithData:[receipt valueForKey:@"img"]];
     cell.checkBox.hidden = !isSelectMode;
     cell.checkBox.tag = indexPath.row;
     cell.checkBox.delegate = self;
@@ -476,15 +437,19 @@ UIActivityIndicatorView* _activityIndicator;
     
 //    NSLog(@"EXIF= %@", [receipt valueForKey:@"exif"]);
 
-//    NSLog(@"indexPath.row= %ld",(long)indexPath.row);
-    if ([receipt valueForKey:@"thumbnailImage"] != NULL) {
-        cell.receiptImageView.image = [UIImage imageWithData:[receipt valueForKey:@"thumbnailImage"]];
-    } else if (![[self.thumbnailsCache allKeys] containsObject:thumbnailCacheKey]) {
+    NSLog(@"indexPath.row= %ld",(long)indexPath.row);
+//    if ([receipt valueForKey:@"thumbnailImage"] != NULL) {
+//        cell.receiptImageView.image = [UIImage imageWithData:[receipt valueForKey:@"thumbnailImage"]];
+//    } else
+    if (![[self.thumbnailsCache allKeys] containsObject:thumbnailCacheKey]) {
         NSString *thumbnailURL = [receipt valueForKey:@"MobileThumbnailReceiptPath"];
         if([thumbnailURL isEqualToString:@""]) {
             thumbnailURL = [receipt valueForKey:@"ReceiptPath"];
         }
-        if ([thumbnailURL containsString:@"https://"]) {
+        if ([thumbnailURL containsString:@".pdf"]) {
+            cell.receiptImageView.image = [UIImage imageNamed:@"pdf-512"];
+            [self.thumbnailsCache setObject:[UIImage imageNamed:@"pdf-512"] forKey:thumbnailCacheKey];
+        } else if ([thumbnailURL containsString:@"https://"]) {
             dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
             dispatch_async(queue, ^(void) {
                 NSURL *url = [NSURL URLWithString:thumbnailURL];
@@ -501,7 +466,6 @@ UIActivityIndicatorView* _activityIndicator;
                                 rotatedImage = img;
                             }
                             cell.receiptImageView.image = rotatedImage;
-//                            cell.receiptImageView.transform = CGAffineTransformMakeRotation(M_PI_2);
                             [self.thumbnailsCache setObject:rotatedImage forKey:thumbnailCacheKey];
                             [cell setNeedsLayout];
                             [self saveThumbnailImg:(UIImagePNGRepresentation(rotatedImage)) forReceiptId:[receipt valueForKey:@"receiptBoxID"]];
@@ -517,16 +481,15 @@ UIActivityIndicatorView* _activityIndicator;
             }
         }
     } else {
-//        cell.receiptImageView.image = (UIImage*) [self.thumbnailsCache objectForKey:thumbnailCacheKey];
+        cell.receiptImageView.image = (UIImage*) [self.thumbnailsCache objectForKey:thumbnailCacheKey];
     }
     
-//    NSLog(@"[receipt valueForKey:@receiptState]= %@", [receipt valueForKey:@"receiptState"]);
     if ([[receipt valueForKey:@"receiptState"] integerValue] == 1
         || [[receipt valueForKey:@"receiptState"] integerValue] == 2
         ) {
         cell.syncIcon.hidden = false;
     } else {
-        cell.syncIcon.hidden = false;
+        cell.syncIcon.hidden = true;
     }
     
     return cell;
@@ -535,9 +498,9 @@ UIActivityIndicatorView* _activityIndicator;
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
-//    CGFloat screenHeight = screenRect.size.height;
+    CGFloat screenHeight = (screenWidth/2)*8.0/6.0;
     
-    return CGSizeMake(screenWidth/2, (screenWidth/2)*8.0/6.0);
+    return CGSizeMake(screenWidth/2, screenHeight);
 }
 
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
@@ -591,14 +554,14 @@ UIActivityIndicatorView* _activityIndicator;
 }
 
 - (void)didTapCheckBox:(BEMCheckBox*)checkBox {
-    NSLog(@"CheckBox= %ld", (long)checkBox.tag);
+//    NSLog(@"CheckBox= %ld", (long)checkBox.tag);
     NSManagedObject *receipt = [self.receiptsArray objectAtIndex:checkBox.tag];
     if(checkBox.on) {
         [self.selectedItems addObject:receipt];
     } else {
         [self.selectedItems removeObject:receipt];
     }
-    NSLog(@"receipt -> %@", receipt);
+//    NSLog(@"receipt -> %@", receipt);
     if(isSelectMode) {
         if(self.selectedItems.count > 0) {
             self.deleteButton.enabled = YES;
@@ -612,7 +575,7 @@ UIActivityIndicatorView* _activityIndicator;
 {
     if ([[segue identifier] isEqualToString:@"ShowReceipt"]) {
         ReceiptViewController *receiptVC = [segue destinationViewController];
-        receiptVC.userID = selectedReciptIndex;// set your properties here
+        receiptVC.userID = selectedReciptIndex;
         NSManagedObject *receipt = [self.receiptsArray objectAtIndex:selectedReciptIndex];
         NSString* receiptPath = [receipt valueForKey:@"receiptPath"];
         receiptVC.receiptPath = receiptPath;
@@ -625,16 +588,12 @@ UIActivityIndicatorView* _activityIndicator;
         }
         arrangeVC.receiptsArray = [[NSMutableArray alloc] init];
         for (NSManagedObject* mo in self.selectedItems) {
-//            NSNumber* receiptBoxId = [NSNumber numberWithInt:[[mo valueForKey:@"receiptBoxID"] intValue]];
             NSString* receipptPath = [mo valueForKey:@"receiptPath"];
             [arrangeVC.receiptIds addObject:receipptPath];
             [arrangeVC.receiptsArray addObject:mo];
         }
 //        NSLog(@"arrangeVC.receiptsArray= %@", arrangeVC.receiptsArray);
     }
-//    DetailViewController *detailVC = segue.destinationViewController;
-//    NSIndexPath *selectedPath = [self.tableView indexPathForSelectedRow];
-//    detailVC.movie = [self movieForIndexPath:selectedPath];
 }
 
 -(void)OnScanDocumentClicked {
@@ -733,15 +692,7 @@ UIActivityIndicatorView* _activityIndicator;
             selectMode = DELETE;
         }
     }
-    
     [self setSelectModeButton];
-//    if(!isSelectMode) {
-//        self.deleteButton.hidden = YES;
-//        self.plusButton.hidden = NO;
-//    } else {
-//        self.deleteButton.hidden = NO;
-//        self.plusButton.hidden = YES;
-//    }
     
 //    [self.selectedItems removeAllObjects];
     [self.receiptBoxCollectionView reloadData];
@@ -751,45 +702,29 @@ UIActivityIndicatorView* _activityIndicator;
     if(self.selectedItems.count <= 0) {
         return;
     }
-//    AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-//    NSManagedObjectContext *context = [delegate managedObjectContext];
-
     for (NSManagedObject *receipt in self.selectedItems) {
-//        [self.receiptsArray removeObject:receipt];
-//        [context deleteObject:receipt];
         if ([[receipt valueForKey:@"receiptState"] integerValue] == [[NSNumber numberWithInt:1] integerValue]
             || [[receipt valueForKey:@"receiptState"] integerValue] == [[NSNumber numberWithInt:2] integerValue]
             ) {
             [self deleteLocalRecipt:receipt];
+            [self selectButtonClicked:self];
             [self.receiptBoxCollectionView reloadData];
             continue;
+        } else {
+            NSNumber* receiptBoxId = [NSNumber numberWithInt:[[receipt valueForKey:@"receiptBoxID"] intValue]];
+//            NSLog(@"receiptBoxId= %@", receiptBoxId);
+            [mServiceWrapper removeReceiptFromBox:[NSNumber numberWithInt:69] ReceiptId:receiptBoxId];
+            [self selectButtonClicked:self];
         }
-        NSNumber* receiptBoxId = [NSNumber numberWithInt:[[receipt valueForKey:@"receiptBoxID"] intValue]];
-        NSLog(@"receiptBoxId= %@", receiptBoxId);
-        [mServiceWrapper removeReceiptFromBox:[NSNumber numberWithInt:69] ReceiptId:receiptBoxId];
     }
-    
-//    NSError *error = nil;
-//    // Save the object to persistent store
-//    if (![context save:&error]) {
-//        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-//    }
-    
-//    isSelectMode = NO;
-//    [self.selectedItems removeAllObjects];
-//    [self.receiptBoxCollectionView reloadData];
-    [self selectButtonClicked:self];
 }
 
 - (void) deleteLocalRecipt:(NSManagedObject*)receipt {
-    AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [delegate managedObjectContext];
-    
-    [context deleteObject:receipt];
+    [self.managedObjectContext deleteObject:receipt];
     
     NSError *error = nil;
     // Save the object to persistent store
-    if (![context save:&error]) {
+    if (![self.managedObjectContext save:&error]) {
         NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }
 
@@ -807,19 +742,17 @@ UIActivityIndicatorView* _activityIndicator;
        ) {
         for (NSManagedObject *receipt in self.selectedItems) {
 //            [receipt setValue:[NSNumber numberWithInt:2] forKey:@"receiptState"];
-            NSLog(@"receipt -> %@", receipt);
+//            NSLog(@"receipt -> %@", receipt);
             [self updateDeletedReceiptsforId:[[receipt valueForKey:@"receiptBoxID"] stringValue]];
         }
     } else {
-        AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-        NSManagedObjectContext *context = [delegate managedObjectContext];
         for (NSManagedObject *receipt in self.selectedItems) {
             [self.receiptsArray removeObject:receipt];
-            [context deleteObject:receipt];
+            [self.managedObjectContext deleteObject:receipt];
         }
         NSError *error = nil;
         // Save the object to persistent store
-        if (![context save:&error]) {
+        if (![self.managedObjectContext save:&error]) {
             NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
         }
     }
@@ -829,11 +762,9 @@ UIActivityIndicatorView* _activityIndicator;
 }
 
 - (void) updateDeletedReceiptsforId:(NSString*) receiptId {
-    AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [delegate managedObjectContext];
     NSPredicate *p = [NSPredicate predicateWithFormat:@"receiptBoxID = %@", receiptId];
     NSError *error = nil;
-    NSLog(@"p= %@", p);
+//    NSLog(@"p= %@", p);
     NSArray *dbarray = [self dbArrayWithPredicade:p];
     
     if (dbarray.count > 0) {
@@ -841,7 +772,7 @@ UIActivityIndicatorView* _activityIndicator;
     }
     
     // Save the object to persistent store
-    if (![context save:&error]) {
+    if (![self.managedObjectContext save:&error]) {
         NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }
 }
@@ -854,15 +785,6 @@ UIActivityIndicatorView* _activityIndicator;
     self.selectedSegmentIndex = segControll.selectedSegmentIndex;
     
     [self.receiptBoxCollectionView reloadData];
-}
-
--(NSManagedObjectContext*)managedObjectContext {
-    NSManagedObjectContext *context = nil;
-    AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate respondsToSelector:@selector(persistentContainer)]) {
-        context = delegate.persistentContainer.viewContext;
-    }
-    return context;
 }
 
 @end
