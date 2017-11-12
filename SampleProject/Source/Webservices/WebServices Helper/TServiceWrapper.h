@@ -16,6 +16,7 @@
 -(void)pendingListDoneWithStatus : (NSMutableArray *) pendingList;
 -(void)uploadReceiptDoneWithInfo:(NSMutableArray*)uploadReceiptInfo;
 -(void)removeReceiptDoneWithStatus:(NSMutableDictionary*)deleteStatus;
+-(void)removeReceiptDoneWithInfo:(NSString*)deleteStatus;
 @end
 
 

@@ -185,45 +185,6 @@ NSIndexPath* selectedCellPath;
             [self.collectionView addSubview:self.snapshotView];
             cell.CoverView.hidden = NO;
             cell.CoverView.backgroundColor = self.collectionView.backgroundColor;
-//            cell.cellImageView.image = [self imageByApplyingAlpha:0.1 toImage:cell.cellImageView.image];
-//            cell.cellImageView.image
-//            cell.highlighted = NO;
-//            cell.cellImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-//            cell.contentView.alpha = 0;
-//            cell.hidden = YES;
-//            cell.alpha = 0.0;
-//            cell.contentView.hidden = YES;
-//            cell.backgroundColor = self.collectionView.backgroundColor;
-//            cell.hideFlag = true;
-//            UIView* cover = [[UIView alloc] initWithFrame:CGRectMake(0, 0, cell.bounds.size.width, cell.bounds.size.height)];
-//            cover.backgroundColor = self.collectionView.backgroundColor;
-//            cover.tintColor = UIColor.whiteColor;
-//            [cell.contentView addSubview:cover];
-            
-//            cell.contentView.alpha = 0.0;
-//            [cell.contentView setAlpha:0.0f];
-//            cell.imageView.alpha = 0.0;
-//            cell.hidden = YES;
-//            cell.cellImageView.backgroundColor = UIColor.clearColor;
-//            cell.inputAccessoryView.alpha = 0;
-            
-//            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-//            dispatch_async(queue, ^(void) {
-//                NSURL *url = [NSURL URLWithString:thumbnailURL];
-//                NSData *data = [NSData dataWithContentsOfURL:url];
-//                UIImage *img = [UIImage imageWithData:data];
-//                if(img) {
-//                    dispatch_async(dispatch_get_main_queue(), ^{
-//                        if (cell.tag == indexPath.row) {
-//                            cell.imageView.image = img;
-//                            [self.thumbnailsCache setObject:img forKey:thumbnailCacheKey];
-//                            [cell setNeedsLayout];
-//                        }
-//                    });
-//                }
-//            });
-
-//            NSLog(@"cell= %f", cell);
             NSLog(@"cell.contentView.alpha= %f", cell.contentView.alpha);
             NSLog(@"cell.imageView.alpha= %f", cell.imageView.alpha);
             [UIView animateWithDuration:0.2 animations:^{

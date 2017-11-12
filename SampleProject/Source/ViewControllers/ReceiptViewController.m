@@ -11,6 +11,7 @@
 @interface ReceiptViewController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) NSString* receiptPath;
 
 @end
 
@@ -32,24 +33,13 @@ TServiceWrapper* m_ServiceWrapper;
 }
 
 -(void)loadReceiptImage {
-//    if(self.userID != NULL)
-    {
-//        self.navigationController.navigationBar.hidden = YES;
-//        self.automaticallyAdjustsScrollViewInsets = NO;
-        AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-        NSManagedObjectContext *context = [delegate managedObjectContext];
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"ReceiptBox"];
-        NSMutableArray *receiptArray = [[context executeFetchRequest:fetchRequest error:nil] mutableCopy];
-        receiptArray = [[[receiptArray reverseObjectEnumerator] allObjects] mutableCopy];
-        self.receipt = [receiptArray objectAtIndex:self.userID];
+    self.receiptPath = [self.receipt valueForKey:@"receiptPath"];
+    self.imageView.image = [UIImage imageWithData:[self.receipt valueForKey:@"thumbnailImage"]];
         
-        self.imageView.image = [UIImage imageWithData:[self.receipt valueForKey:@"thumbnailImage"]];
-        
-        if ([self.receiptPath containsString:@".pdf"]) {
-            [self showPDFforPath:self.receiptPath];
-        } else {
-            [self loadImage];
-        }
+    if ([self.receiptPath containsString:@".pdf"]) {
+        [self showPDFforPath:self.receiptPath];
+    } else {
+        [self showImage];
     }
 }
 
@@ -76,71 +66,96 @@ TServiceWrapper* m_ServiceWrapper;
     [m_ServiceWrapper removeReceiptFromBox:[NSNumber numberWithInt:69] ReceiptId:receiptBoxId];
     
 //    self.navigationController.navigationBar.hidden = NO;
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 }
 
 - (void) removeReceiptDoneWithStatus:(NSMutableDictionary*)deleteReceiptInfo {
     if([deleteReceiptInfo isKindOfClass:[NSError class]] || [deleteReceiptInfo isKindOfClass:[SoapFault class]]) {
         
     } else {
-        AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-        NSManagedObjectContext *context = [delegate managedObjectContext];
-        
-        [context deleteObject:self.receipt];
+        [self.managedObjectContext deleteObject:self.receipt];
         
         NSError *error = nil;
         // Save the object to persistent store
-        if (![context save:&error]) {
+        if (![self.managedObjectContext save:&error]) {
             NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        }
+    }
+    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)removeReceiptDoneWithInfo:(NSString*)deleteStatus {
+    if([deleteStatus isKindOfClass:[NSError class]] || [deleteStatus isKindOfClass:[SoapFault class]]) {
+        NSLog(@"ERROR While DELETING -> %@", deleteStatus);
+    } else {
+        [self.managedObjectContext deleteObject:self.receipt];
+        
+        NSError *error = nil;
+        // Save the object to persistent store
+        if (![self.managedObjectContext save:&error]) {
+            NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        }
+    }
+    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void) showImage {
+    if ([self.receipt valueForKey:@"img"] != NULL) {
+        if ([[self.receipt valueForKey:@"exif"] isEqualToString:@"90"]) {
+            self.imageView.image = [self imageRotatedByDegrees:[UIImage imageWithData:[self.receipt valueForKey:@"img"]] deg:90];
+        } else {
+            self.imageView.image = [UIImage imageWithData:[self.receipt valueForKey:@"img"]];
+        }
+    } else {
+        if ([self.receiptPath containsString:@"https://"]) {
+            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+            dispatch_async(queue, ^(void) {
+                NSURL *url = [NSURL URLWithString:self.receiptPath];
+                NSData *data = [NSData dataWithContentsOfURL:url];
+                UIImage *img = [UIImage imageWithData:data];
+                if(img) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if ([self.receipt valueForKey:@"exif"] == [NSString stringWithFormat:@"90"]) {
+                            self.imageView.image = [self imageRotatedByDegrees:img deg:90];
+//                            [self updateDBReceiptsFor:[NSString stringWithFormat:@"%@",[self.receipt valueForKey:@"receiptBoxID"]] withValue:@"0" forKey:@"exif"];
+                        } else {
+                            self.imageView.image = img;
+                        }
+                        [self updateDBReceiptsFor:[NSString stringWithFormat:@"%@",[self.receipt valueForKey:@"receiptBoxID"]] withValue:UIImagePNGRepresentation(img) forKey:@"img"];
+                    });
+                }
+            });
         }
     }
 }
 
-- (void) loadImage {
-    if ([self.receipt valueForKey:@"img"] != NULL) {
-        self.imageView.image = [UIImage imageWithData:[self.receipt valueForKey:@"img"]];
-    } else if ([self.receiptPath containsString:@"https://"]) {
-        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-        dispatch_async(queue, ^(void) {
-            NSURL *url = [NSURL URLWithString:self.receiptPath];
-            NSData *data = [NSData dataWithContentsOfURL:url];
-            UIImage *img = [UIImage imageWithData:data];
-            if(img) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if ([self.receipt valueForKey:@"exif"] == [NSString stringWithFormat:@"90"]) {
-                        self.imageView.image = [self imageRotatedByDegrees:img deg:90];
-                    } else {
-                        self.imageView.image = img;
-                    }
-                    [self saveThumbnailImg:UIImagePNGRepresentation(self.imageView.image) forReceiptId:[self.receipt valueForKey:@"receiptBoxID"]];
-                });
-            }
-        });
-    }
-}
-
-- (void) saveThumbnailImg:(NSData*) img forReceiptId:(NSString*) receiptId {
-    AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [delegate managedObjectContext];
+- (void) updateDBReceiptsFor:(NSString*) receiptId withValue:(id) value forKey:(NSString*) key {
     NSPredicate *p = [NSPredicate predicateWithFormat:@"receiptBoxID = %@", receiptId];
     NSError *error = nil;
-    NSLog(@"p= %@", p);
-//    NSArray *dbarray = [self dbArrayWithPredicade:p];
-    
-    NSFetchRequest * fetctRequest = [NSFetchRequest fetchRequestWithEntityName:@"ReceiptBox"];
-    [fetctRequest setIncludesPropertyValues:NO];
-    [fetctRequest setPredicate:p];
-//    NSError *error = nil;
-    NSArray *dbarray = [context executeFetchRequest:fetctRequest error:&error];
+    //    NSLog(@"p= %@", p);
+    NSArray *dbarray = [self dbArrayWithPredicade:p];
     
     if (dbarray.count > 0) {
-        [[dbarray objectAtIndex:0] setValue:img forKey:@"img"];
+        [[dbarray objectAtIndex:0] setValue:value forKey:key];
     }
     
     // Save the object to persistent store
-    if (![context save:&error]) {
+    if (![self.managedObjectContext save:&error]) {
         NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }
+}
+
+- (NSArray*) dbArrayWithPredicade:(NSPredicate*) predicate {
+    NSFetchRequest * fetctRequest = [NSFetchRequest fetchRequestWithEntityName:@"ReceiptBox"];
+    [fetctRequest setIncludesPropertyValues:NO];
+    [fetctRequest setPredicate:predicate];
+    NSError *error = nil;
+    NSArray *dbarray = [self.managedObjectContext executeFetchRequest:fetctRequest error:&error];
+    
+    return dbarray;
 }
 
 - (UIImage *)imageRotatedByDegrees:(UIImage*)oldImage deg:(CGFloat)degrees{

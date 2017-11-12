@@ -176,58 +176,10 @@
 
 - (void) RemoveFileHandler: (NSString *) value
 {
-    NSMutableDictionary *responseDetails = [[NSMutableDictionary alloc] initWithCapacity:3];
-    
-    
-    // Handle errors
-    if([value isKindOfClass:[NSError class]]) {
-        NSLog(@"%@", value);
-        [responseDetails setObject:[NSNumber numberWithBool:NO] forKey:@"IsRemoveFileDone"];
-        if([self.delegate respondsToSelector:@selector(removeReceiptDoneWithStatus:)])
-        {
-            [self.delegate removeReceiptDoneWithStatus : responseDetails];
-        }
-        
-        return;
-    }
-    
-    // Handle faults
-    if([value isKindOfClass:[SoapFault class]]) {
-        NSLog(@"%@", value);
-        [responseDetails setObject:[NSNumber numberWithBool:NO] forKey:@"IsRemoveFileDone"];
-        if([self.delegate respondsToSelector:@selector(removeReceiptDoneWithStatus:)])
-        {
-            [self.delegate removeReceiptDoneWithStatus : responseDetails];
-        }
-        return;
-    }
-    
-    
     // Do something with the NSString* result
     NSString* result = (NSString*)value;
-    
-    if (result != nil && ![result isEqualToString:@"Error"])
-    {
-        //        mAppDelegate.fileUploadState = YES;
-        //        mAppDelegate.expenseReceiptPath = result;
-        //        [responseDetails setObject:[NSNumber numberWithBool:YES] forKey:@"IsFileUploadDone"];
-        //        [responseDetails setObject:result forKey:@"ReceiptPath"];
-        [responseDetails setObject:[NSNumber numberWithBool:YES] forKey:@"IsFileUploadDone"];
-        [responseDetails setObject:result forKey:@"ReceiptPath"];
-    }
-    else{
-        //        mAppDelegate.expenseReceiptPath = nil;
-        //        [responseDetails setObject:[NSNumber numberWithBool:NO] forKey:@"IsFileUploadDone"];
-        [responseDetails setObject:[NSNumber numberWithBool:NO] forKey:@"IsFileUploadDone"];
-    }
-    
-    //NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    //[notificationCenter postNotificationName:@"UploadFileNotification" object:nil];
-    if([self.delegate respondsToSelector:@selector(removeReceiptDoneWithStatus:)])
-    {
-        
-        [self.delegate removeReceiptDoneWithStatus : responseDetails];
-        
+    if ([self.delegate respondsToSelector:@selector(removeReceiptDoneWithInfo:)]) {
+        [self.delegate removeReceiptDoneWithInfo:result];
     }
 }
 

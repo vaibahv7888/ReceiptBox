@@ -12,8 +12,6 @@
 
 @interface ReceiptViewController : UIViewController <TServiceWrapperDelegate>
 
-@property (nonatomic) NSInteger userID;
-@property (nonatomic, strong) NSString* receiptPath;
 @property (strong, nonatomic) NSManagedObject *receipt;
-
+@property (strong, nonatomic) NSManagedObjectContext* managedObjectContext;
 @end

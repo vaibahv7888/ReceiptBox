@@ -162,7 +162,7 @@
 		218F567E1F50078600E92415 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 218F567D1F50078600E92415 /* libxml2.2.tbd */; };
 		218F56811F500A3A00E92415 /* SDZService_Mobile.m in Sources */ = {isa = PBXBuildFile; fileRef = 218F567F1F500A3A00E92415 /* SDZService_Mobile.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		218F56851F50127C00E92415 /* pdfRedImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 218F56841F50127C00E92415 /* pdfRedImage.png */; };
-		CA2D5F8A755466B161E5DB99 /* libPods-SampleProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F35D4969A7622A38B7B3CC /* libPods-SampleProject.a */; };
+		46B34131819AF90504266C1F /* Pods_SampleProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63886FD221971926B625C4E2 /* Pods_SampleProject.framework */; };
 		D42FA7D01F66F5CF00601D8E /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = D42FA7CF1F66F5CF00601D8E /* XMLReader.m */; };
 		D43144FE1F8568A600175CD9 /* PDFGenratorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D43144FD1F8568A600175CD9 /* PDFGenratorViewController.m */; };
 		D43D6AA21F78446E008CFFDC /* pic_6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D43D6A9E1F78446E008CFFDC /* pic_6.jpg */; };
@@ -202,7 +202,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		05F35D4969A7622A38B7B3CC /* libPods-SampleProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SampleProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		218F54881F5004D400E92415 /* SampleProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		218F548C1F5004D400E92415 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		218F54951F5004D400E92415 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -492,6 +491,7 @@
 		218F567F1F500A3A00E92415 /* SDZService_Mobile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDZService_Mobile.m; sourceTree = "<group>"; };
 		218F56801F500A3A00E92415 /* SDZService_Mobile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDZService_Mobile.h; sourceTree = "<group>"; };
 		218F56841F50127C00E92415 /* pdfRedImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pdfRedImage.png; sourceTree = "<group>"; };
+		63886FD221971926B625C4E2 /* Pods_SampleProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SampleProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C397CF4B51ACC0489DBD46BE /* Pods-SampleProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-SampleProject/Pods-SampleProject.release.xcconfig"; sourceTree = "<group>"; };
 		D42FA7CE1F66F5CF00601D8E /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
 		D42FA7CF1F66F5CF00601D8E /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
@@ -550,7 +550,7 @@
 				218F565A1F50067100E92415 /* libicucore.tbd in Frameworks */,
 				218F56581F50066800E92415 /* libxml2.tbd in Frameworks */,
 				218F56561F50065E00E92415 /* LocalAuthentication.framework in Frameworks */,
-				CA2D5F8A755466B161E5DB99 /* libPods-SampleProject.a in Frameworks */,
+				46B34131819AF90504266C1F /* Pods_SampleProject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -981,7 +981,7 @@
 				218F56591F50067100E92415 /* libicucore.tbd */,
 				218F56571F50066800E92415 /* libxml2.tbd */,
 				218F56551F50065E00E92415 /* LocalAuthentication.framework */,
-				05F35D4969A7622A38B7B3CC /* libPods-SampleProject.a */,
+				63886FD221971926B625C4E2 /* Pods_SampleProject.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

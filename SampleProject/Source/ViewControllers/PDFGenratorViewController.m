@@ -11,6 +11,12 @@
 #define Username @"qcmanager1.gorilla@gmail.com"
 
 @interface PDFGenratorViewController ()
+{
+    NSString* pdfFileName;
+    UIActivityIndicatorView* activityIndicator;
+    bool isPhotoTaken;
+}
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 - (void) generatePdfWithFilePath: (NSString *)thefilePath;
 - (void) drawPageNumber:(NSInteger)pageNum;
 - (void) drawBorder;
@@ -25,8 +31,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    [self generatePdfButtonPressed:self];
+    isPhotoTaken = false;
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [self createPDF];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,6 +44,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    self.saveButton.enabled = NO;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -191,17 +199,26 @@
     yourWebView.scalesPageToFit = YES;
     [yourWebView loadRequest:requestObj];
     [self.view addSubview:yourWebView];
+    self.saveButton.enabled = YES;
 }
 
 - (IBAction)generatePdfButtonPressed:(id)sender {
+    isPhotoTaken = true;
+    [self uploadReceipt:[NSData dataWithContentsOfFile:pdfFileName]];
+    self.navigationController.navigationBarHidden = YES;
+    [self.view addSubview:activityIndicator];
+    activityIndicator.center = self.view.center;
+    [activityIndicator startAnimating];
+}
+
+- (void) createPDF {
     pageSize = CGSizeMake(612, 792);
     NSString *fileName = @"Demo1.pdf";
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *pdfFileName = [documentsDirectory stringByAppendingPathComponent:fileName];
+    pdfFileName = [documentsDirectory stringByAppendingPathComponent:fileName];
     
     [self generatePdfWithFilePath:pdfFileName];
-//    [self uploadReceipt:[NSData dataWithContentsOfFile:pdfFileName]];
 }
 
 - (void)uploadReceipt:(NSData*)imageData {
@@ -214,10 +231,59 @@
 }
 
 -(void)uploadReceiptDoneWithInfo:(NSMutableArray*)uploadReceiptInfo {
-    NSLog(@"uploadReceiptDoneWithInfo= %@", uploadReceiptInfo);
-    NSDictionary* uploadedReceiptInfo = (NSDictionary*)[uploadReceiptInfo objectAtIndex:0];
-    NSLog(@"uploadedReceiptInfo= %@", uploadedReceiptInfo);
-    [self saveReceipt:uploadedReceiptInfo];
+//    NSLog(@"uploadReceiptDoneWithInfo= %@", uploadReceiptInfo);
+//    NSDictionary* uploadedReceiptInfo = (NSDictionary*)[uploadReceiptInfo objectAtIndex:0];
+//    NSLog(@"uploadedReceiptInfo= %@", uploadedReceiptInfo);
+//    [self saveReceipt:uploadedReceiptInfo];
+    if([uploadReceiptInfo isKindOfClass:[NSError class]] || [uploadReceiptInfo isKindOfClass:[SoapFault class]]) {
+        if (isPhotoTaken) {
+            isPhotoTaken = false;
+//            [self showToastMessage];
+            [self ShowAlert:@"Unable to uload PDF"];
+        }
+    } else {
+        NSDictionary* uploadedReceiptInfo = (NSDictionary*)[uploadReceiptInfo objectAtIndex:0];
+        NSLog(@"uploadedReceiptInfo= %@", uploadedReceiptInfo);
+        [self saveReceipt:uploadedReceiptInfo];
+    }
+    [activityIndicator stopAnimating];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+//- (void)showToastMessage {
+//    NSString *message = @"Unable to uload PDF";
+//    UIAlertView *toast = [[UIAlertView alloc] initWithTitle:nil
+//                                                    message:message
+//                                                   delegate:nil
+//                                          cancelButtonTitle:nil
+//                                          otherButtonTitles:nil, nil];
+//    [toast show];
+//    int duration = 3; // in seconds
+//
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, duration * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//        [toast dismissWithClickedButtonIndex:0 animated:YES];
+//    });
+//}
+
+- (void) ShowAlert:(NSString *)Message {
+    UIAlertController * alert=[UIAlertController alertControllerWithTitle:nil
+                                                                  message:@""
+                                                           preferredStyle:UIAlertControllerStyleAlert];
+    UIView *firstSubview = alert.view.subviews.firstObject;
+    UIView *alertContentView = firstSubview.subviews.firstObject;
+    for (UIView *subSubView in alertContentView.subviews) {
+        subSubView.backgroundColor = [UIColor colorWithRed:141/255.0f green:0/255.0f blue:254/255.0f alpha:1.0f];
+    }
+    NSMutableAttributedString *AS = [[NSMutableAttributedString alloc] initWithString:Message];
+    [AS addAttribute: NSForegroundColorAttributeName value: [UIColor whiteColor] range: NSMakeRange(0,AS.length)];
+    [alert setValue:AS forKey:@"attributedTitle"];
+    [self presentViewController:alert animated:YES completion:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [alert dismissViewControllerAnimated:YES completion:^{
+            [activityIndicator stopAnimating];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }];
+    });
 }
 
 - (void)saveReceipt:(NSDictionary*)receipt {

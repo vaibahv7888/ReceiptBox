@@ -23,8 +23,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Hcs-Ix-Bfp">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="511"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="491"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lrk-MG-7Ob">
                                     <size key="itemSize" width="80" height="80"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -56,7 +56,7 @@
                                                         <constraint firstAttribute="width" constant="20" id="q2P-sQ-2on"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="sync" translatesAutoresizingMaskIntoConstraints="NO" id="dPM-tn-kE7">
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sync" translatesAutoresizingMaskIntoConstraints="NO" id="dPM-tn-kE7">
                                                     <rect key="frame" x="60" y="0.0" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="SOj-7X-pqU"/>
@@ -268,7 +268,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="o54-jh-E1k">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="5o3-Ah-92P">
+                        <barButtonItem key="rightBarButtonItem" title="Preview" id="5o3-Ah-92P">
                             <connections>
                                 <action selector="onSaveButtonClicked:" destination="jE8-Ct-8AU" id="Lv2-Ow-7IM"/>
                             </connections>
@@ -296,12 +296,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Mvu-wY-3ty">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="HYF-0p-cdW">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="HYF-0p-cdW">
                             <connections>
                                 <action selector="generatePdfButtonPressed:" destination="vWo-j1-GqT" id="7iJ-10-CoN"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="saveButton" destination="HYF-0p-cdW" id="dsT-QU-VMV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cHe-UL-Xop" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

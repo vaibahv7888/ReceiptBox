@@ -241,7 +241,7 @@ bool isPhotoTaken = false;
 //    [self.navigationController popToRootViewControllerAnimated:YES];
     self.navigationController.navigationBarHidden = YES;
     [self.view addSubview:activityIndicator];
-    activityIndicator.center = CGPointMake(160, 240);
+    activityIndicator.center = self.view.center;
     [activityIndicator startAnimating];
 }
 
