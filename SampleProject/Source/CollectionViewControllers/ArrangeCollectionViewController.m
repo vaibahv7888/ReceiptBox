@@ -266,56 +266,26 @@ NSIndexPath* selectedCellPath;
     }
 }
 
-//- (UIImage*) getImageForIndexPath:(NSIndexPath*) indexpath {
-//    UIImage* img;
-//    AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-//    NSManagedObjectContext *context = [delegate managedObjectContext];
-//
-//
-//    return img;
-//}
-
-//- (UIImage*) getRotatedImageForIndexPath:(NSIndexPath*)indexPath {
-//    UIImage* img;
-//    AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-//    NSManagedObjectContext *context = [delegate managedObjectContext];
-//    
-//    
-//    
-//    return img;
-//}
-
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-#warning Incomplete implementation, return the number of sections
     return 1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//#warning Incomplete implementation, return the number of items
-//    return self.imagesArray.count;
     return self.receiptIds.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     ArrangeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ArrangeCollectionViewCell" forIndexPath:indexPath];
     // Configure the cell
-//    [cell configureUI];
-//    NSString* imgName = [self.imagesArray objectAtIndex:indexPath.row];
-//    cell.imageView.image = [UIImage imageNamed:imgName];
-//    cell.cellImageView.image = [UIImage imageNamed:imgName];
-//    cell.backgroundColor = UIColor.darkGrayColor;
-//    cell.backgroundColor = UIColor.clearColor;
-//    cell.contentView.alpha = 0.0;
     cell.tag = indexPath.row;
     NSString *thumbnailCacheKey = [NSString stringWithFormat:@"cache_%ld", (long)indexPath.row];
     NSManagedObject* receipt = [self.receiptsArray objectAtIndex:indexPath.row];
 //    NSLog(@"indexPath.row= %ld",(long)indexPath.row);
     if (![[self.receiptImgCache allKeys] containsObject:thumbnailCacheKey]) {
         NSString *thumbnailURL = [self.receiptIds objectAtIndex:indexPath.row];
-        if (![thumbnailURL containsString:@"https://"]) {
+        if ([thumbnailURL containsString:@"https://"]) {
             dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
             dispatch_async(queue, ^(void) {
                 NSURL *url = [NSURL URLWithString:thumbnailURL];
@@ -340,24 +310,10 @@ NSIndexPath* selectedCellPath;
                     });
                 }
             });
-        } else {
-//            cell.imageView.image = nil;
-            UIImage* rotatedImage;
-            if ([receipt valueForKey:@"exif"] == [NSString stringWithFormat:@"90"]) {
-//                rotatedImage = [self imageRotatedByDegrees:[UIImage imageWithData:[receipt valueForKey:@"img"]] deg:90];
-                rotatedImage = [UIImage imageWithData:[receipt valueForKey:@"img"]];
-            } else {
-                rotatedImage = [UIImage imageWithData:[receipt valueForKey:@"img"]];
-            }
-            cell.imageView.image = rotatedImage;
-            [self.receiptImgCache setObject:rotatedImage forKey:thumbnailCacheKey];
-            [self.imagesArray addObject:rotatedImage];
-            [cell setNeedsLayout];
         }
     } else {
         cell.imageView.image = (UIImage*) [self.receiptImgCache objectForKey:thumbnailCacheKey];
     }
-//    cell.imageView.image = [self.imagesArray objectAtIndex:indexPath.row];
     
     if (indexPath == self.snapshotIndexPath || indexPath == selectedCellPath) {
         cell.contentView.alpha = 1;
