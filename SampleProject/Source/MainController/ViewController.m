@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "RBCollectionViewCell.h"
 #import "SoapReachability.h"
+#import "AddReceiptViewController.h"
 //#import "BEMCheckBox.h"
 //#import "SampleProject-swift.h"
 
@@ -65,6 +66,7 @@ SelectItemMode selectMode;
 NSInteger selectedReciptIndex;
 bool isSelectMode = false;
 bool isDeleteCalled = false;
+bool isScan = true;
 TServiceWrapper  *mServiceWrapper;
 NSMutableArray* _deltaReceiptImagesArray;
 UIActivityIndicatorView* _activityIndicator;
@@ -536,12 +538,22 @@ UIActivityIndicatorView* _activityIndicator;
         }
         [self.selectedItems removeAllObjects];
 //        NSLog(@"arrangeVC.receiptsArray= %@", arrangeVC.receiptsArray);
+    } else if ([[segue identifier] isEqualToString:@"TakePhoto"]) {
+        AddReceiptViewController* addReceiptVC = [segue destinationViewController];
+        addReceiptVC.isScan = isScan;
     }
 }
 
 -(void)OnScanDocumentClicked {
+    isScan = true;
     [self performSegueWithIdentifier:@"TakePhoto" sender:self];
 }
+
+-(void)OnUploadPhotoClicked {
+    isScan = false;
+    [self performSegueWithIdentifier:@"TakePhoto" sender:self];
+}
+
 
 - (void) onCreatePDFClicked {
     selectMode = CREATE_PDF;
@@ -570,7 +582,7 @@ UIActivityIndicatorView* _activityIndicator;
                              handler:^(UIAlertAction * action)
                              {
                                  [view dismissViewControllerAnimated:YES completion:nil];
-                                 
+                                 [self OnUploadPhotoClicked];
                              }];
     
     UIAlertAction* createPDF = [UIAlertAction

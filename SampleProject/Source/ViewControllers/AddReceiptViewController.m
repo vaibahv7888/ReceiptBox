@@ -47,7 +47,11 @@ bool isPhotoTaken = false;
     }
     activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     
-    [self takePhotoClicked:self];
+    if (self.isScan) {
+        [self takePhotoClicked:self];
+    } else {
+        [self selectPhotoClicked:self];
+    }
     
 //    NSLog(@"Is Connected to Network= %@", [SoapReachability connectedToNetwork]);
 }
@@ -257,6 +261,7 @@ bool isPhotoTaken = false;
 
 -(void)uploadReceiptDoneWithInfo:(NSMutableArray*)uploadReceiptInfo {
     NSLog(@"uploadReceiptDoneWithInfo= %@", uploadReceiptInfo);
+    self.navigationController.navigationBarHidden = NO;
     if([uploadReceiptInfo isKindOfClass:[NSError class]] || [uploadReceiptInfo isKindOfClass:[SoapFault class]]) {
         if (isPhotoTaken) {
             isPhotoTaken = false;
@@ -268,7 +273,7 @@ bool isPhotoTaken = false;
         [self saveReceipt:uploadedReceiptInfo];
     }
     [activityIndicator stopAnimating];
-    self.navigationController.navigationBarHidden = NO;
+    
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

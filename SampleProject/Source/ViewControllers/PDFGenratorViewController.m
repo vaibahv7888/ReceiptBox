@@ -235,6 +235,7 @@
 //    NSDictionary* uploadedReceiptInfo = (NSDictionary*)[uploadReceiptInfo objectAtIndex:0];
 //    NSLog(@"uploadedReceiptInfo= %@", uploadedReceiptInfo);
 //    [self saveReceipt:uploadedReceiptInfo];
+    self.navigationController.navigationBarHidden = NO;
     if([uploadReceiptInfo isKindOfClass:[NSError class]] || [uploadReceiptInfo isKindOfClass:[SoapFault class]]) {
         if (isPhotoTaken) {
             isPhotoTaken = false;

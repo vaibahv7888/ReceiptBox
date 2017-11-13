@@ -12,5 +12,5 @@
 #import "ViewController.h"
 
 @interface AddReceiptViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, TServiceWrapperDelegate>
-
+@property (nonatomic) BOOL isScan;
 @end
