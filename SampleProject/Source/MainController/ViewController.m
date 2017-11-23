@@ -114,7 +114,7 @@ UIActivityIndicatorView* _activityIndicator;
 }
 
 -(void)pendingListDoneWithStatus:(NSMutableArray *) pendingList {
-    NSLog(@"pendingList= %@", pendingList);
+//    NSLog(@"pendingList= %@", pendingList);
     if([pendingList isKindOfClass:[NSError class]]) {
         return;
     }
@@ -138,7 +138,7 @@ UIActivityIndicatorView* _activityIndicator;
 //    NSLog(@"receiptMutableArray -> %@", self.receiptMutableArray);
     NSPredicate *p = [NSPredicate predicateWithFormat:@"receiptState = %@", [NSString stringWithFormat:@"1"]];
     NSError *error = nil;
-    NSLog(@"p= %@", p);
+//    NSLog(@"p= %@", p);
     NSArray *dbarray = [self dbArrayWithPredicade:p];
     
     TServiceWrapper  *mServiceWrapper = [[TServiceWrapper alloc] init];
@@ -192,7 +192,7 @@ UIActivityIndicatorView* _activityIndicator;
         NSPredicate *p = [NSPredicate predicateWithFormat:@"ReceiptBoxId = %@", receiptBoxId];
         
         NSArray *matchedDicts = [self.receiptMutableArray filteredArrayUsingPredicate:p];    //[self dbArrayWithPredicade:p];
-        NSLog(@"receiptState= %@", [mo valueForKey:@"receiptState"]);
+//        NSLog(@"receiptState= %@", [mo valueForKey:@"receiptState"]);
         if (matchedDicts.count == 0
             && [[[mo valueForKey:@"receiptState"] stringValue] isEqualToString:@"0"]
             ) {
@@ -302,7 +302,7 @@ UIActivityIndicatorView* _activityIndicator;
 - (void) saveThumbnailImg:(NSData*) img forReceiptId:(NSString*) receiptId {
     NSPredicate *p = [NSPredicate predicateWithFormat:@"receiptBoxID = %@", receiptId];
     NSError *error = nil;
-    NSLog(@"p= %@", p);
+//    NSLog(@"p= %@", p);
     NSArray *dbarray = [self dbArrayWithPredicade:p];
     
     if (dbarray.count > 0) {
@@ -439,10 +439,14 @@ UIActivityIndicatorView* _activityIndicator;
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = (screenWidth/2)*8.0/6.0;
-    
-    return CGSizeMake(screenWidth/2, screenHeight);
+    CGFloat screenWidth = (screenRect.size.width)/2;
+    CGFloat screenHeight = (screenWidth)*8.0/6.0;
+
+    if (screenRect.size.width > 375) {
+        screenWidth = (screenRect.size.width-8)/2;
+        screenHeight = (screenWidth)*8.0/6.0;
+    }
+    return CGSizeMake(screenWidth, screenHeight);
 }
 
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {

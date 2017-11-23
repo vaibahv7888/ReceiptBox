@@ -200,7 +200,7 @@
 	{
 		[responseScanner scanUpToString:@"s:Envelope>" intoString:&response];
 		response = [response stringByAppendingString:@"s:Envelope>"];
-        NSLog(@"response= %@",response);
+//        NSLog(@"response= %@",response);
 //        NSLog(@"Success");
 	}
 	else 
